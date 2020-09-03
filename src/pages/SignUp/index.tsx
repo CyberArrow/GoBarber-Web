@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import React, { useCallback, useRef } from 'react';
 import { FiArrowLeft, FiMail, FiLock, FiUser } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from '../../assets/logo.svg';
@@ -59,10 +61,10 @@ const SignUp: React.FC = () => {
           <Button type="submit">Cadastrar</Button>
         </Form>
 
-        <a href="nova-conta">
+        <Link to="/">
           <FiArrowLeft />
           Voltar para logon
-        </a>
+        </Link>
       </Content>
     </Container>
   );
