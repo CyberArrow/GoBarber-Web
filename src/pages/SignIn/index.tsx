@@ -6,7 +6,8 @@ import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 
 import getValidationErrors from '../../utils/getValidationErrors';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -24,6 +25,7 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -41,7 +43,7 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        signIn({
+        await signIn({
           email: data.email,
           password: data.password,
         });
@@ -51,10 +53,10 @@ const SignIn: React.FC = () => {
 
           formRef.current?.setErrors(errors);
         }
-        //Toast message
+        addToast();
       }
     },
-    [signIn],
+    [signIn, addToast],
   );
 
   return (
